@@ -1,0 +1,8 @@
+{
+  "name": "kevin-co-portfolio",
+  "private": true,
+  "scripts": {
+    "test": "node --test work/crossword-qa/*.test.cjs",
+    "serve": "python3 -m http.server 63219 --bind 127.0.0.1 --directory outputs/portfolio-preview"
+  }
+}
