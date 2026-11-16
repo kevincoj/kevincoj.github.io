@@ -52,7 +52,7 @@ function createCompletionView({record,client,solver,dialog,onSummary,openComplet
       form.hidden=false;addName.hidden=false;input.value=result.name||'';submit.textContent=result.name?'Update my name':'Add my name';
       ++readVersion;presentSummary(result);
     } catch(error) {
-      if(!destroyed){message.textContent=client.configured?`Your completion has not been confirmed. ${error.message}`:'Completion tracking is not available yet. Your solve is saved in this browser.';retry.hidden=!client.configured;}
+      if(!destroyed){message.textContent=client.configured?`Your completion has not been confirmed. ${error.message}`:'Completion tracking is not available yet.';retry.hidden=!client.configured;}
     } finally {busy=false;}
   }
   function updateEligibility() {

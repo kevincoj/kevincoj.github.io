@@ -10,7 +10,12 @@
 .collection-page #puz-message{font-size:13px;color:#51524e;margin-bottom:28px}
 .collection-page .crossword-library h3{display:none}
 .collection-page .crossword-library{padding-top:0}
-.puzzle-page .puzzle-heading,.puzzle-page #puz-message,.puzzle-page #crossword-library{display:none}
+.puzzle-page .puzzle-heading,.puzzle-page #crossword-library{display:none}
+.puzzle-page #puz-message{display:block;font-size:.9rem;line-height:1.5;margin:12px 0}
+.puzzle-page #puz-message:empty{display:none}
+.puzzle-fallback-nav{display:flex;gap:24px;margin:16px 0 24px}
+.puzzle-fallback-nav a{text-decoration:underline;text-underline-offset:4px}
+.puzzle-page:has(#solver:not([hidden])) .puzzle-fallback-nav{display:none}
 .puzzle-page .solver-heading{display:flex;align-items:center;gap:22px;height:48px;margin-bottom:8px}
 .puzzle-page #show-library{flex:none;font-size:12px;margin:0;padding:5px 0}
 .puzzle-page #solver .puzzle-byline{display:flex;align-items:baseline;gap:12px;min-width:0}

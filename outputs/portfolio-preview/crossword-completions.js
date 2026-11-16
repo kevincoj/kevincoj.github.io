@@ -1,4 +1,4 @@
-function createCompletionClient({baseUrl,fetchImpl=fetch,storage,randomUUID=()=>crypto.randomUUID()}) {
+function createCompletionClient({baseUrl,fetchImpl=fetch,storage,randomUUID=()=>crypto.randomUUID(),identityLock=typeof navigator!=='undefined'&&navigator.locks?(name,callback)=>navigator.locks.request(name,callback):null}) {
   const inflight=new Map();
   const tokenKey='portfolio-completion-browser-v1';
   function identity() {
@@ -17,7 +17,11 @@ function createCompletionClient({baseUrl,fetchImpl=fetch,storage,randomUUID=()=>
     const url=new URL(baseUrl,typeof location==='undefined'?undefined:location.href);
     const options={method,headers:{'content-type':'application/json'},signal:AbortSignal.timeout(10000)};
     if(method==='GET'){url.searchParams.set('puzzleId',puzzleId);if(cursor)url.searchParams.set('cursor',cursor);}
-    else options.body=JSON.stringify({puzzleId,revision,browserToken:identity(),...(name===undefined?{}:{name})});
+    else {
+      if(typeof window!=='undefined'&&!identityLock)throw Error('This browser cannot safely record completions. Use a current browser over HTTPS.');
+      const browserToken=identityLock?await identityLock(tokenKey,identity):identity();
+      options.body=JSON.stringify({puzzleId,revision,browserToken,...(name===undefined?{}:{name})});
+    }
     const response=await fetchImpl(url,options);
     const result=await response.json();
     if(!response.ok)throw Error(result.error||'Could not save your completion. Please try again.');

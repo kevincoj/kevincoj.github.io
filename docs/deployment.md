@@ -90,7 +90,7 @@ Do not label the site live/verified until these checks run against the deployed 
 - A completed published grid counts once per browser identifier; meta puzzles require the meta answer too.
 - Hints and partial reveals are allowed. Choosing Reveal Puzzle makes the attempt ineligible, including after reload.
 - Names are optional, plain text, 1–40 Unicode code points, and explicitly public. Anonymous completions affect only the count.
-- Progress and a random browser identifier use localStorage. If browser storage is denied, solving still works but tracking cannot submit. Imports use sessionStorage.
+- Progress and a random browser identifier use localStorage. If browser storage is denied, solving still works but tracking cannot submit. Browser identity creation uses the Web Locks API to serialize first-time submissions across tabs; use a current browser over HTTPS (localhost also works). Unsupported/insecure contexts keep solving available and explain why tracking cannot submit. Imports use sessionStorage.
 - Timeouts and failed writes are retryable. Reloading an eligible completed puzzle retries with the same token; the database deduplicates it. Offline progress persists when storage is available.
 - Counts represent reported completions, not verified unique people. Clearing browser storage can allow another report.
 - In the Supabase dashboard, clear a completion's `name` to hide abuse while preserving its count; delete a completion to remove the count too. There is no public deletion endpoint. Names can reappear if that browser submits again; stronger moderation is future work.

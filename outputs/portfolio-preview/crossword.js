@@ -24,7 +24,11 @@ function saveCrosswordSession() {
     const snapshot = {game:CrosswordSession.snapshot(record.game), selectedIndex:record.selectedIndex, direction:record.direction, metaGuess:record.metaGuess, metaSolved:record.metaSolved, preferences:crosswordPreferences};
     if (!publishedStorage.writePublished(record.publishedId,record.revision,snapshot)) publishedSaved=false;
   }
-  if (!publishedSaved) document.querySelector('#puz-message').textContent = 'Your browser could not save progress. You can keep solving, but it may be lost when you leave.';
+  if (!publishedSaved) {
+    const message=document.querySelector('#puz-message');
+    message.textContent='Your browser could not save progress. You can keep solving, but it may be lost when you leave.';
+    window.dispatchEvent(new Event('resize'));
+  }
   try {
     sessionStorage.setItem(sessionKey, JSON.stringify({preferences:crosswordPreferences, records:[...puzzleRecords.values()].filter(r=>!r.publishedId).map(record=>({...record,game:CrosswordSession.snapshot(record.game)}))}));
     return true;
@@ -80,14 +84,14 @@ function renderPuzzleLibrary() {
     const phase = record.game?.phase || 'ready';
     const state = document.createElement('span');
     state.className = 'library-state';
-    state.textContent = phase === 'completed' ? (record.game.revealed.size ? 'Completed with reveals' : 'Completed') : phase === 'ready' ? 'Not started' : 'In progress';
+    state.textContent = record.savedProgress && !record.game ? 'Progress saved' : phase === 'completed' ? (record.game.revealed.size ? 'Completed with reveals' : 'Completed') : phase === 'ready' ? 'Not started' : 'In progress';
     if (record.puzzle.details?.meta?.answers?.length) {
       if (record.metaSolved) state.textContent += ' · Meta solved';
       else if (phase === 'completed') state.textContent += ' · Meta remaining';
     }
     const button = document.createElement('button');
     button.className = 'library-open';
-    button.textContent = phase === 'completed' ? 'View puzzle' : phase === 'ready' ? 'Play' : 'Continue';
+    button.textContent = phase === 'completed' ? 'View puzzle' : phase === 'ready' && !record.savedProgress ? 'Play' : 'Continue';
     button.addEventListener('click', () => displayPuzzle(record.puzzle));
     item.append(copy, state, button);
     list.append(item);
@@ -175,6 +179,7 @@ async function displayPuzzle(p) {
   const solver = document.querySelector('#solver');
   const layout = solver.querySelector('.solver-layout');
   const toolbar = document.querySelector('#solver-toolbar');
+  if(pageMode==='puzzle')toolbar.after(document.querySelector('#puz-message'));
   const timerText = document.querySelector('#puzzle-time');
   const timerButton = document.querySelector('#timer-toggle');
   const timerAction = document.querySelector('#timer-action');
@@ -663,7 +668,9 @@ async function initializeCrosswords() {
     for(const entry of relevant) {
       if(pageMode==='collection') {
         const puzzle={publishedId:entry.id,revision:entry.revision,title:entry.title,author:entry.author,details:entry.details||{}};
-        const record={id:entry.id,publishedId:entry.id,revision:entry.revision,puzzle,game:null,entry};
+        const savedSnapshot=publishedStorage.readPublished(entry.id,entry.revision);
+        const savedProgress=!!savedSnapshot?.game && Array.isArray(savedSnapshot.game.values) && ['paused','playing','completed'].includes(savedSnapshot.game.phase);
+        const record={id:entry.id,publishedId:entry.id,revision:entry.revision,puzzle,game:null,entry,savedProgress};
         puzzleRecords.set(puzzleKey(puzzle),record);
       } else {
         const p=parsePuz(await CrosswordCatalog.loadPublishedPuzzle(entry));
@@ -677,7 +684,7 @@ async function initializeCrosswords() {
       document.querySelector('#puz-message').textContent=entries.length?'Pick a crossword to play.':'No crosswords published yet. Check back soon.';
     } else {
       const record=[...puzzleRecords.values()].find(r=>r.id===requestedId);
-      if(record) displayPuzzle(record.puzzle);
+      if(record) {document.querySelector('#puz-message').textContent='';displayPuzzle(record.puzzle);}
       else document.querySelector('#puz-message').textContent='This puzzle is not available. Visit Crosswords to choose another.';
     }
   } catch(error) {
