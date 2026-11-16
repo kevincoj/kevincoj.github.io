@@ -6,34 +6,59 @@ const crosswordPreferences = {...DEFAULT_CROSSWORD_SETTINGS};
 let activeDirection = 'across';
 let crosswordResizeObserver;
 let crosswordCleanup;
-// A tab-local collection; a future published puzzle catalog can use the same records.
 const puzzleRecords = new Map();
 const sessionKey = 'portfolio-crosswords-v1';
-function saveCrosswordSession() {
-  try {
-    sessionStorage.setItem(sessionKey, JSON.stringify({preferences:crosswordPreferences, records:[...puzzleRecords.values()].map(record => ({...record, game:CrosswordSession.snapshot(record.game)}))}));
-    return true;
-  } catch {
-    document.querySelector('#puz-message').textContent = 'Your browser could not save this puzzle for the next page. Allow session storage and try again.';
-    return false;
-  }
+const developmentMode = new URLSearchParams(location.search).get('dev') === '1';
+let persistentStorage;
+try { persistentStorage = localStorage; } catch {}
+const publishedStorage = createCrosswordStorage(persistentStorage);
+let saveTimer;
+function puzzleKey(p) {
+  return p.publishedId ? `published:${p.publishedId}` : JSON.stringify([p.w,p.h,p.title,p.author,p.solution,p.answersAvailable,p.entries.map(e=>e.clue)]);
 }
+function saveCrosswordSession() {
+  let publishedSaved = true;
+  for (const record of puzzleRecords.values()) {
+    if (!record.publishedId || !record.puzzle.solution) continue;
+    const snapshot = {game:CrosswordSession.snapshot(record.game), selectedIndex:record.selectedIndex, direction:record.direction, metaGuess:record.metaGuess, metaSolved:record.metaSolved, preferences:crosswordPreferences};
+    if (!publishedStorage.writePublished(record.publishedId,record.revision,snapshot)) publishedSaved=false;
+  }
+  if (!publishedSaved) document.querySelector('#puz-message').textContent = 'Your browser could not save progress. You can keep solving, but it may be lost when you leave.';
+  try {
+    sessionStorage.setItem(sessionKey, JSON.stringify({preferences:crosswordPreferences, records:[...puzzleRecords.values()].filter(r=>!r.publishedId).map(record=>({...record,game:CrosswordSession.snapshot(record.game)}))}));
+    return true;
+  } catch { return false; }
+}
+function queueCrosswordSave() { clearTimeout(saveTimer); saveTimer=setTimeout(saveCrosswordSession,150); }
 try {
-  const saved = JSON.parse(sessionStorage.getItem(sessionKey) || 'null');
-  for (const record of saved?.records || []) {
-    record.game = CrosswordSession.restore(record.puzzle, record.game);
-    const key = JSON.stringify([record.puzzle.w, record.puzzle.h, record.puzzle.title, record.puzzle.author, record.puzzle.solution, record.puzzle.answersAvailable, record.puzzle.entries.map(entry => entry.clue)]);
-    puzzleRecords.set(key, record);
+  const saved=JSON.parse(sessionStorage.getItem(sessionKey)||'null');
+  if (developmentMode) for (const record of saved?.records||[]) {
+    try { record.game=CrosswordSession.restore(record.puzzle,record.game); puzzleRecords.set(puzzleKey(record.puzzle),record); } catch {}
   }
-  for (const [key, value] of Object.entries(saved?.preferences || {})) {
-    if (typeof crosswordPreferences[key] === typeof value) crosswordPreferences[key] = value;
-  }
-} catch { puzzleRecords.clear(); }
-window.addEventListener('pagehide', () => {crosswordCleanup?.(); saveCrosswordSession();});
-window.addEventListener('pageshow', event => {if (event.persisted) location.reload();});
+  for (const [key,value] of Object.entries(saved?.preferences||{})) if (key in crosswordPreferences && typeof crosswordPreferences[key]===typeof value) crosswordPreferences[key]=value;
+} catch {}
+window.addEventListener('pagehide',()=>{crosswordCleanup?.();saveCrosswordSession();});
+document.addEventListener('visibilitychange',()=>{if(document.hidden) saveCrosswordSession();});
+document.addEventListener('input',queueCrosswordSave);
+document.addEventListener('click',queueCrosswordSave);
+document.addEventListener('keyup',queueCrosswordSave);
+window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
 function puzzleRecord(puzzle) {
-  const key = JSON.stringify([puzzle.w, puzzle.h, puzzle.title, puzzle.author, puzzle.solution, puzzle.answersAvailable, puzzle.entries.map(entry => entry.clue)]);
-  if (!puzzleRecords.has(key)) puzzleRecords.set(key, {id:crypto.randomUUID(), puzzle, game:null, selectedIndex:null, direction:'across'});
+  const key=puzzleKey(puzzle);
+  if (!puzzleRecords.has(key)) {
+    const record={id:puzzle.publishedId||crypto.randomUUID(),publishedId:puzzle.publishedId,revision:puzzle.revision,puzzle,game:null,selectedIndex:null,direction:'across'};
+    if (record.publishedId) {
+      const saved=publishedStorage.readPublished(record.publishedId,record.revision);
+      if(saved) try {
+        record.game=CrosswordSession.restore(puzzle,saved.game);
+        record.selectedIndex=saved.selectedIndex;record.direction=saved.direction;
+        record.metaGuess=typeof saved.metaGuess==='string'?saved.metaGuess:'';
+        record.metaSolved=!!saved.metaSolved && !!puzzle.details?.meta?.answers?.length && checkMetaAnswer(record.metaGuess,puzzle.details.meta.answers)==='correct';
+        for(const [key,value] of Object.entries(saved.preferences||{})) if(key in crosswordPreferences && typeof crosswordPreferences[key]===typeof value)crosswordPreferences[key]=value;
+      } catch {}
+    }
+    puzzleRecords.set(key,record);
+  }
   return puzzleRecords.get(key);
 }
 function renderPuzzleLibrary() {
@@ -63,14 +88,14 @@ function renderPuzzleLibrary() {
     list.append(item);
   }
   document.querySelector('#library-note').textContent = puzzleRecords.size < 2
-    ? 'Open a .puz file above to add a puzzle. Your progress stays in this browser tab.'
-    : 'Choose a puzzle, or open another .puz above. Your progress stays in this browser tab.';
+    ? (developmentMode ? 'Development imports stay in this browser tab.' : 'New crosswords will appear here when Kevin publishes them.')
+    : 'Choose a puzzle. Published puzzle progress is saved in this browser.';
 }
 function showPuzzleLibrary() {
   if (pageMode === 'puzzle') {
     crosswordCleanup?.();
     crosswordCleanup = null;
-    if (saveCrosswordSession()) location.assign('crosswords.html');
+    saveCrosswordSession(); location.assign(`crosswords.html${developmentMode?'?dev=1':''}`);
     return;
   }
   crosswordCleanup?.();
@@ -84,11 +109,14 @@ function showPuzzleLibrary() {
   library.scrollIntoView({behavior:reduceMotion ? 'instant' : 'smooth', block:'start'});
 }
 
-function displayPuzzle(p) {
+async function displayPuzzle(p) {
+  if(p.publishedId && !p.solution) { saveCrosswordSession(); location.assign(`puzzle.html?id=${encodeURIComponent(p.publishedId)}`); return; }
   p.details = p.details || CROSSWORD_DETAILS.find(item => item.title === p.title && (!item.author || item.author === p.author)) || {};
   if (pageMode === 'collection') {
     const record = puzzleRecord(p);
-    if (saveCrosswordSession()) location.assign(`puzzle.html?id=${encodeURIComponent(record.id)}`);
+    const saved=saveCrosswordSession();
+    if(record.publishedId||saved) location.assign(`puzzle.html?id=${encodeURIComponent(record.id)}${developmentMode?'&dev=1':''}`);
+    else document.querySelector('#puz-message').textContent='Development imports need session storage to open. Allow storage and try again.';
     return;
   }
   document.title = `${p.title || 'Crossword'} — Kevin Co`;
@@ -612,11 +640,36 @@ function displayPuzzle(p) {
 }
 document.querySelector('#puz-file').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const p=parsePuz(await file.arrayBuffer());displayPuzzle(p);e.target.value='';document.querySelector('#puz-message').textContent='Arrow keys move · Space switches direction · Tab / Shift+Tab changes clues · typing replaces a letter. Rebus and special puzzle features are not supported yet.'}catch(error){document.querySelector('#puz-message').textContent=error.message}});
 
-if (pageMode === 'collection') {
-  showPuzzleLibrary();
-} else {
-  const id = new URLSearchParams(location.search).get('id');
-  const record = [...puzzleRecords.values()].find(record => record.id === id);
-  if (record) displayPuzzle(record.puzzle);
-  else location.replace('crosswords.html');
+async function initializeCrosswords() {
+  document.querySelector('#puz-file').closest('label').hidden=!developmentMode;
+  document.querySelector('#puz-message').textContent='Loading crosswords…';
+  try {
+    const entries=await CrosswordCatalog.loadCatalog();
+    const requestedId=new URLSearchParams(location.search).get('id');
+    const relevant=pageMode==='collection'?entries:entries.filter(e=>e.id===requestedId);
+    for(const entry of relevant) {
+      if(pageMode==='collection') {
+        const puzzle={publishedId:entry.id,revision:entry.revision,title:entry.title,author:entry.author,details:entry.details||{}};
+        const record={id:entry.id,publishedId:entry.id,revision:entry.revision,puzzle,game:null,entry};
+        puzzleRecords.set(puzzleKey(puzzle),record);
+      } else {
+        const p=parsePuz(await CrosswordCatalog.loadPublishedPuzzle(entry));
+        Object.assign(p,{publishedId:entry.id,revision:entry.revision,details:entry.details||{}});
+        puzzleRecord(p);
+      }
+    }
+    if(pageMode==='collection') {
+      // Fetch only the puzzle a visitor opens; the catalog stays lightweight.
+      showPuzzleLibrary();
+      document.querySelector('#puz-message').textContent=entries.length?'Pick a crossword to play.':'No crosswords published yet. Check back soon.';
+    } else {
+      const record=[...puzzleRecords.values()].find(r=>r.id===requestedId);
+      if(record) displayPuzzle(record.puzzle);
+      else document.querySelector('#puz-message').textContent='This puzzle is not available. Visit Crosswords to choose another.';
+    }
+  } catch(error) {
+    document.querySelector('#puz-message').textContent=error.message;
+    const retry=document.createElement('button');retry.textContent='Try again';retry.onclick=()=>{retry.remove();initializeCrosswords();};document.querySelector('#puz-message').append(' ',retry);
+  }
 }
+initializeCrosswords();

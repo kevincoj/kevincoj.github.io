@@ -13,7 +13,8 @@ const CrosswordSession = {
     game.marks = saved.marks.map(mark => ['correct','incorrect'].includes(mark) ? mark : null);
     game.revealed = new Set((saved.revealed || []).filter(index => game.indices.includes(index)));
     game.autoCheck = !!saved.autoCheck;
-    game.phase = saved.phase === 'completed' ? 'completed' : saved.phase === 'ready' ? 'ready' : 'paused';
+    const solved = game.answersAvailable && game.indices.length && game.indices.every(index => game.values[index] === game.solution[index]);
+    game.phase = saved.phase === 'completed' && solved ? 'completed' : saved.phase === 'ready' ? 'ready' : 'paused';
     game.elapsed = Math.max(0, Number(saved.elapsed) || 0);
     return game;
   }
