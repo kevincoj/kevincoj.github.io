@@ -13,6 +13,7 @@ let persistentStorage;
 try { persistentStorage = localStorage; } catch {}
 const publishedStorage = createCrosswordStorage(persistentStorage);
 let saveTimer;
+const completionClient=createCompletionClient({baseUrl:window.CROSSWORD_COMPLETIONS_URL||'',storage:persistentStorage});
 function puzzleKey(p) {
   return p.publishedId ? `published:${p.publishedId}` : JSON.stringify([p.w,p.h,p.title,p.author,p.solution,p.answersAvailable,p.entries.map(e=>e.clue)]);
 }
@@ -72,6 +73,10 @@ function renderPuzzleLibrary() {
     const author = document.createElement('p');
     author.textContent = record.puzzle.author || '';
     copy.append(title, author);
+    if(record.publishedId) {
+      const count=document.createElement('span');count.className='library-completion-count';count.textContent='Loading completions…';copy.append(count);
+      completionClient.getSummary(record.publishedId).then(summary=>{count.textContent=`${summary.count} ${summary.count===1?'completion':'completions'}`;}).catch(()=>{count.textContent='Completion count unavailable';});
+    }
     const phase = record.game?.phase || 'ready';
     const state = document.createElement('span');
     state.className = 'library-state';
@@ -148,6 +153,7 @@ async function displayPuzzle(p) {
   const record = puzzleRecord(p);
   const game = record.game || new CrosswordGame(p);
   record.game = game;
+  let completionView;
   const details = p.details;
   const meta = details.meta?.answers?.length ? details.meta : null;
   const infoButton = document.querySelector('#puzzle-info');
@@ -215,6 +221,8 @@ async function displayPuzzle(p) {
       document.querySelector('#meta-form button').disabled = true;
       metaInput.removeAttribute('aria-invalid');
       metaFeedback.textContent = 'Meta solved! You found the final answer.';
+      completionView?.updateEligibility();
+      queueCrosswordSave();
     } else {
       metaInput.setAttribute('aria-invalid', String(result === 'incorrect'));
       metaFeedback.textContent = result === 'empty' ? 'Enter a meta answer first.' : 'That’s not the meta answer. Take another look at the grid and try again.';
@@ -277,6 +285,8 @@ async function displayPuzzle(p) {
     renderPhase();
     feedback.textContent = 'Puzzle completed. The timer is stopped; you can review your answers.';
     showDialog('complete');
+    completionView?.updateEligibility();
+    queueCrosswordSave();
     return true;
   }
   function showDialog(kind) {
@@ -322,7 +332,7 @@ async function displayPuzzle(p) {
         renderAnswers();
         feedback.textContent = 'Editable entries cleared. Permanent answers and timer kept.';
       } else if (confirmingReveal) {
-        game.reveal(game.indices);
+        game.reveal(game.indices,true);
         renderAnswers();
       } else {
         game.start();
@@ -637,6 +647,9 @@ async function displayPuzzle(p) {
   solver.scrollIntoView({behavior:'instant', block:'start'});
   if (game.phase !== 'completed') showDialog(game.phase === 'ready' ? 'start' : 'pause');
   else feedback.textContent = 'Completed puzzle. Timer stopped; answers are read-only.';
+  completionView=createCompletionView({record,client:completionClient,solver,dialog,openCompletion:()=>showDialog('complete')});
+  const previousCleanup=crosswordCleanup;
+  crosswordCleanup=()=>{completionView.destroy();previousCleanup?.();};
 }
 document.querySelector('#puz-file').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const p=parsePuz(await file.arrayBuffer());displayPuzzle(p);e.target.value='';document.querySelector('#puz-message').textContent='Arrow keys move · Space switches direction · Tab / Shift+Tab changes clues · typing replaces a letter. Rebus and special puzzle features are not supported yet.'}catch(error){document.querySelector('#puz-message').textContent=error.message}});
 

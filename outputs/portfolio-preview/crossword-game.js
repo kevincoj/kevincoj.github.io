@@ -7,6 +7,7 @@ class CrosswordGame {
     this.marks = Array(this.solution.length).fill(null);
     this.revealed = new Set();
     this.autoCheck = false;
+    this.usedFullReveal = false;
     this.phase = 'ready';
     this.now = now;
     this.elapsed = 0;
@@ -52,8 +53,9 @@ class CrosswordGame {
     }
     return true;
   }
-  reveal(indices) {
+  reveal(indices, fullPuzzle = false) {
     if (this.phase !== 'playing' || !this.answersAvailable) return false;
+    if (fullPuzzle) this.usedFullReveal = true;
     for (const index of indices) {
       if (!this.indices.includes(index) || this.isLocked(index)) continue;
       this.values[index] = this.solution[index];

@@ -1,0 +1,2 @@
+const {defineConfig}=require('@playwright/test');
+module.exports=defineConfig({testDir:'work/browser-tests',timeout:30000,workers:1,use:{baseURL:'http://127.0.0.1:63219',headless:true,viewport:{width:1280,height:800},launchOptions:process.env.BROWSER_EXECUTABLE?{executablePath:process.env.BROWSER_EXECUTABLE}:{}},webServer:{command:'python3 -m http.server 63219 --bind 127.0.0.1 --directory outputs/portfolio-preview',url:'http://127.0.0.1:63219',reuseExistingServer:true},outputDir:'work/browser-artifacts/results'});

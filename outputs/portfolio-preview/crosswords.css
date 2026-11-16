@@ -59,3 +59,24 @@
 .puzzle-page #solver .clue-columns h4{font-size:24px}
 @media(max-width:1000px){.puzzle-page #solver .puzzle-byline p{display:none}.puzzle-page .site-nav{gap:12px}}
 @media(max-width:600px){.crossword-page .site-header{gap:14px;height:58px}.site-brand{font-size:26px}.site-nav{gap:14px;font-size:12px}.site-nav a[href="index.html#projects"],.site-nav a[href="index.html#about"]{display:none}.collection-page .puzzle-heading{margin-top:24px;gap:18px;padding:23px;flex-wrap:wrap}.collection-page .puzzle-heading h2{font-size:36px}.collection-stamp{grid-template-columns:repeat(5,9px)}.collection-stamp i{width:9px;height:9px}.collection-page .puzzle-heading .file-button{margin-left:68px}.collection-page .crossword-library li{padding:20px 12px}.puzzle-page .site-header{height:44px;gap:12px}.puzzle-page .site-brand{font-size:23px}.puzzle-page #solver .puzzle-byline{display:none}.puzzle-page .site-nav{margin-left:auto}}
+/* The community section sits below the fitted board, leaving its size intact. */
+.completion-community{max-width:760px;margin:48px auto 20px;padding-top:24px;border-top:1px solid var(--ink,#222);text-align:left}
+.completion-community h3{font-family:Newsreader,Georgia,serif;font-size:2rem;margin:0 0 12px}
+.completion-count{font-weight:600;margin:0 0 8px;font-variant-numeric:tabular-nums}
+.completion-note{font-size:.875rem;line-height:1.5;color:#414d48;margin:8px 0 16px}
+.completion-solvers{padding:0;margin:20px 0;list-style:none}
+.completion-solvers li{display:flex;justify-content:space-between;gap:24px;padding:12px 0;border-bottom:1px solid #ccd3cd;overflow-wrap:anywhere}
+.completion-solvers time{flex-shrink:0;font-size:.85rem;color:#414d48;font-variant-numeric:tabular-nums}
+.completion-community button{padding:10px 14px;margin:4px 8px 4px 0;border:1px solid #26382e;background:#e3ecdf;color:#18251d;font:inherit;cursor:pointer}
+.completion-entry{text-align:left;margin:20px 0;padding-top:16px;border-top:1px solid #c6cfc4}
+.completion-entry label{display:block;font-size:.9rem;font-weight:600;margin:12px 0 6px}
+.completion-entry input{display:block;box-sizing:border-box;width:100%;padding:10px 12px;border:1px solid #56665a;background:#fffdf7;color:#18251d;font:inherit;caret-color:#18251d}
+.completion-entry button{margin:6px 0;padding:10px 14px;font:inherit;cursor:pointer}
+.completion-entry p{font-size:.9rem;line-height:1.5}
+.completion-entry input:focus-visible,.completion-entry button:focus-visible,.completion-community button:focus-visible{outline:2px solid #304a81;outline-offset:3px}
+.completion-entry button:disabled,.completion-community button:disabled{opacity:.55;cursor:wait}
+.completion-community button:hover,.completion-entry button:hover{filter:brightness(.96)}
+.library-completion-count{display:block;font-size:.85rem;margin-top:8px;color:#414d48}
+#crossword-dialog{max-height:calc(100dvh - 32px);overflow:auto}
+[hidden]{display:none!important}
+@media(max-width:600px){.completion-community{margin-top:36px;padding:20px 4px}.completion-solvers li{gap:16px}.completion-solvers time{font-size:.75rem}}
