@@ -45,8 +45,8 @@ Clean, technical, friendly, and personal. Simplistic, with minimal text and rest
 ## Evidence on Hand
 
 - TeachLA Coding Race: a coding platform for formative assessment and engagement in computer science classrooms; currently being worked on. Kevin is working with teachers at TeachLA @ UCLA; implementation details remain unconfirmed.
-- Tablature stitching script: assembles cropped tablature screenshots by measure. The user said Claude built the script. Kevin describes building it to turn scattered screenshots from fingerstyle guitar tutorial videos into a condensed printable practice sheet; implementation details remain unconfirmed.
-- No real project screenshots, code, or recordings supplied yet. Prior generated project previews are illustrative and must not be presented as real evidence.
+- Vid2Tab (formerly Tablature Stitcher): turns YouTube guitar tab videos into clean printable sheet music PDFs. Kevin built the Python pipeline with yt-dlp, ffmpeg and image processing, using Claude Code as an AI pair-programmer. It handles page changes/scrolling tabs, per-video crop confirmation, overlay/background cleanup, preserved notation/chord diagrams, and full-width justified PDF layout. Kevin explicitly confirmed the local web UI, sheet player and video play-along are available; hosted access is next. Supplied MP4/GIF walkthrough and before/after comparison are real project materials. Repository: https://github.com/kevincoj/Vid2Tab.
+- Real Vid2Tab recordings and comparison image are supplied and used. TeachLA still uses a clearly labeled illustrative animation; no real TeachLA recording was supplied.
 - Planning sources: https://dev.to/kethmars/what-i-learned-after-reviewing-over-40-developer-portfolios-9-tips-for-a-better-portfolio-4me7 and https://javascript.plainenglish.io/how-to-create-a-kick-ass-portfolio-site-that-will-wow-your-next-employer-5e5e2009222 . Only the public opening of the latter was accessible.
 
 ## Product Principles

@@ -17,4 +17,4 @@ Open http://127.0.0.1:63219/ . The production puzzle catalog is intentionally em
 - Node tests: `npm test`; browser tests: `npx playwright install chromium`, then `npm run test:browser`.
 - Original project: `/Users/kevin/Documents/Codex/2026-10-23/i-wan` was preserved.
 
-Project animations remain illustrative; real recordings, project links and résumé still need the owner's content. The original solver supports basic rectangular .puz puzzles; rebus/circles and locked solutions are unsupported. Read [deployment and publishing instructions](docs/deployment.md) before making the site public.
+Vid2Tab uses the supplied real MP4 walkthrough, a first-frame poster, GIF fallback and before/after comparison. TeachLA still uses a labeled illustrative animation; its recording and the résumé still need the owner’s content. The original solver supports basic rectangular .puz puzzles; rebus/circles and locked solutions are unsupported. Read [deployment and publishing instructions](docs/deployment.md) before making the site public.

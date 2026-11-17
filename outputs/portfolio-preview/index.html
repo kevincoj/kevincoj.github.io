@@ -1,22 +1,40 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kevin Co — projects & puzzles</title><link rel="stylesheet" href="style.css?v=kevin-1"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kevin Co — projects & puzzles</title><link rel="stylesheet" href="style.css?v=vid2tab-1"></head>
 <body>
 <a class="skip" href="#projects">Skip to projects</a>
 <div class="page">
 <header><a class="wordmark" href="#projects">Kevin Co<span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span></a><nav aria-label="Main navigation"><a class="active" href="#projects">Projects</a><a href="crosswords.html">Crosswords</a><a href="#about">About</a></nav></header>
 <main id="projects" aria-label="Selected projects">
 <div class="portfolio-intro"><p>Hi I'm Kevin Co I'm a CS student at UCLA and these are my personal projects</p><div class="contact-links" aria-label="Find me online"><a href="https://github.com/kevincoj">GitHub</a><a href="https://www.linkedin.com/in/kevinco26">LinkedIn</a><a href="mailto:kevinco@ucla.edu">Email <span aria-hidden="true">↗</span></a></div></div>
+<article class="project project-featured" id="vid2tab">
+<div class="media blue vid2tab-media" id="vid2tab-demo" data-project-media>
+<img class="project-poster" src="assets/projects/vid2tab/poster.jpg" width="1600" height="1000" alt="Vid2Tab’s local app, with a YouTube link field and a library of printable guitar sheets." fetchpriority="high">
+<video autoplay muted loop playsinline preload="metadata" poster="assets/projects/vid2tab/poster.jpg" width="1600" height="1000" data-src="assets/projects/vid2tab/demo.mp4" data-fallback-src="assets/projects/vid2tab/demo.gif" aria-label="Vid2Tab demo: a YouTube guitar tutorial becomes a printable sheet, followed by play-along in the local app." hidden></video>
+<div class="media-controls"><span class="sample-label">Local app walkthrough</span><button class="pause project-media-toggle" aria-label="Play Vid2Tab demo" aria-pressed="true" hidden><span class="pause-icon" aria-hidden="true"></span><span class="media-toggle-text" aria-hidden="true">Play</span></button></div>
+<p class="media-status visually-hidden" role="status"></p>
+<noscript><a class="media-download" href="assets/projects/vid2tab/demo.mp4">Watch the Vid2Tab demo</a></noscript>
+</div>
+<div class="project-copy"><div class="title-line"><h1>Vid2Tab</h1><span class="status">Featured project</span></div><p>I built Vid2Tab to turn YouTube guitar tab videos into clean, printable sheet music PDFs.</p>
+<ul class="tech-tags" aria-label="Built with"><li>Python</li><li>yt-dlp</li><li>ffmpeg</li><li>Image processing</li></ul>
+<div class="actions"><button class="explore" data-details="vid2tab-details" aria-controls="vid2tab-details" aria-expanded="false">Explore project <span aria-hidden="true">↗</span></button><a class="explore project-link" href="https://github.com/kevincoj/Vid2Tab">GitHub <span aria-hidden="true">↗</span></a></div>
+</div>
+<details class="project-details" id="vid2tab-details"><summary>Vid2Tab project notes</summary><div class="project-detail-grid">
+<section><h3>Problem</h3><p>I learn fingerstyle guitar from YouTube. Tutorials show a few bars at a time, so I kept pausing and scrubbing to play along. I wanted a sheet I could print and practise from.</p></section>
+<section><h3>How it works</h3><p class="project-pipeline">YouTube link → frame extraction → crop → cleanup → stitch &amp; justify → PDF</p><p>I confirm the crop once per video. Vid2Tab handles page changes and scrolling tabs, cleans up overlays and backgrounds, and packs the music into full-width lines. It keeps the notation staff and chord diagrams when the source has them.</p></section>
+<section class="project-demo"><h3>Demo</h3><p>The recording above shows my local app: paste a link, confirm the music area, make a sheet, then play along with the video and the current measure highlighted.</p><figure><img src="assets/projects/vid2tab/before-after.png" width="3200" height="1800" loading="lazy" decoding="async" alt="Before: a YouTube guitar tutorial shows a few bars with a moving playhead and overlays. After: Vid2Tab arranges the notation and tablature into clean, full-width lines on a printable sheet."><figcaption>From a few bars on screen to one printable practice sheet.</figcaption></figure></section>
+<section><h3>Tech</h3><p>I built the processing pipeline in Python, with yt-dlp for downloads, ffmpeg for video processing, and image processing for cleanup and layout. I used Claude Code as an AI pair-programmer.</p></section>
+<section><h3>What’s next</h3><p>The web interface, on-screen sheet player, and video play-along work in the local app. Next, I want to offer hosted access: paste a link and get a PDF without running it locally.</p></section>
+</div></details>
+</article>
+
 <article class="project" id="teachla">
 <div class="media yellow" data-demo="race"><canvas aria-label="Illustrative coding race animation"></canvas><video muted loop playsinline hidden aria-label="TeachLA project recording"></video><div class="media-controls"><span class="sample-label">Sample animation</span><button class="pause" aria-label="Pause TeachLA preview" aria-pressed="false"><span class="pause-icon" aria-hidden="true"></span></button></div></div>
-<div class="project-copy"><div class="title-line"><h1>TeachLA <br>Coding Race</h1><span class="status">In progress</span></div><p>A formative assessment and engagement tool for computer science classrooms.</p><div class="actions"><button class="explore" data-details="teachla-details" aria-expanded="false">Explore project <span aria-hidden="true">↗</span></button></div><details class="project-details" id="teachla-details"><summary>Project notes</summary><p>I’m working with teachers at TeachLA @ UCLA to build a formative assessment and engagement tool for computer science classrooms.</p></details></div>
+<div class="project-copy"><div class="title-line"><h2>TeachLA <br>Coding Race</h2><span class="status">In progress</span></div><p>A formative assessment and engagement tool for computer science classrooms.</p><div class="actions"><button class="explore" data-details="teachla-details" aria-expanded="false">Explore project <span aria-hidden="true">↗</span></button></div><details class="project-details" id="teachla-details"><summary>Project notes</summary><p>I’m working with teachers at TeachLA @ UCLA to build a formative assessment and engagement tool for computer science classrooms.</p></details></div>
 </article>
-<article class="project" id="tablature">
-<div class="media blue" data-demo="tabs"><canvas aria-label="Illustrative animation of tablature measures being stitched"></canvas><video muted loop playsinline hidden aria-label="Tablature project recording"></video><div class="media-controls"><span class="sample-label">Sample animation</span><button class="pause" aria-label="Pause tablature preview" aria-pressed="false"><span class="pause-icon" aria-hidden="true"></span></button></div></div>
-<div class="project-copy"><h2>Tablature <br>Stitcher</h2><p>A tool that stitches tablature screenshots measure by measure into a printable music practice sheet.</p><div class="actions"><button class="explore" data-details="tablature-details" aria-expanded="false">Explore project <span aria-hidden="true">↗</span></button></div><details class="project-details" id="tablature-details"><summary>Project notes</summary><p>My favorite way to learn fingerstyle guitar songs is through YouTube videos with scrolling tablature. My sheet music ended up as scattered, messily cropped screenshots that I had to swipe through while learning.</p><p>I made this tool to stitch those screenshots together into one condensed practice sheet.</p></details></div>
-</article>
+
 <section class="crosswords" id="crosswords"><div class="crossword-mark" aria-hidden="true"></div><div><h2>A little wordplay.</h2><p>A home for my crosswords.</p></div><a class="puzzle-open" href="crosswords.html">Browse puzzles <span aria-hidden="true">↗</span></a></section>
 <section id="about" class="about" hidden><h2>A little about me.</h2><p>I’m Kevin Co, a computer science student at UCLA. This is a home for my personal projects and crosswords.</p><div class="contact-links"><a href="https://github.com/kevincoj">GitHub</a><a href="https://www.linkedin.com/in/kevinco26">LinkedIn</a><a href="mailto:kevinco@ucla.edu">kevinco@ucla.edu</a></div></section>
 </main>
 <footer><span>Kevin Co · Projects & puzzles.</span><a href="mailto:kevinco@ucla.edu">kevinco@ucla.edu</a></footer>
-<details class="preview-tools"><summary>Try your own recordings</summary><p>Videos replace the sample animations inside the same panels. Files stay local and reset when you reload.</p><div class="upload-row"><label class="file-button">TeachLA recording<input type="file" accept="video/*" data-video="race"></label><label class="file-button">Tablature recording<input type="file" accept="video/*" data-video="tabs"></label><button id="reset-media">Reset previews</button></div></details>
-</div><script src="portfolio.js?v=kevin-1"></script></body></html>
+<details class="preview-tools"><summary>Try your own recordings</summary><p>Videos replace the sample animations inside the same panels. Files stay local and reset when you reload.</p><div class="upload-row"><label class="file-button">TeachLA recording<input type="file" accept="video/*" data-video="race"></label><button id="reset-media">Reset previews</button></div></details>
+</div><script src="portfolio.js?v=vid2tab-1"></script><script src="project-media.js?v=vid2tab-1"></script></body></html>

@@ -7,3 +7,4 @@ supabase/.branches/
 work/browser-artifacts/
 
 work/dashboard-deploy/
+dist/
