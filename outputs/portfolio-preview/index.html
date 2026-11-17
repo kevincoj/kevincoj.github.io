@@ -15,15 +15,14 @@
 <noscript><a class="media-download" href="assets/projects/vid2tab/demo.mp4">Watch the Vid2Tab demo</a></noscript>
 </div>
 <div class="project-copy"><div class="title-line"><h1>Vid2Tab</h1><span class="status">Featured project</span></div><p>I built Vid2Tab to turn YouTube guitar tab videos into clean, printable sheet music PDFs.</p>
-<ul class="tech-tags" aria-label="Built with"><li>Python</li><li>yt-dlp</li><li>ffmpeg</li><li>Image processing</li></ul>
+<ul class="tech-tags" aria-label="Built with"><li>Python</li><li>yt-dlp</li><li>ffmpeg</li><li>Image processing</li><li>Claude Code · AI coding agent</li></ul>
 <div class="actions"><button class="explore" data-details="vid2tab-details" aria-controls="vid2tab-details" aria-expanded="false">Explore project <span aria-hidden="true">↗</span></button><a class="explore project-link" href="https://github.com/kevincoj/Vid2Tab">GitHub <span aria-hidden="true">↗</span></a></div>
 </div>
 <details class="project-details" id="vid2tab-details"><summary>Vid2Tab project notes</summary><div class="project-detail-grid">
-<section><h3>Problem</h3><p>I learn fingerstyle guitar from YouTube. Tutorials show a few bars at a time, so I kept pausing and scrubbing to play along. I wanted a sheet I could print and practise from.</p></section>
+<section><h3>Problem</h3><p>I learn fingerstyle guitar from YouTube. Tutorials show a few bars at a time, so I kept pausing and scrubbing to play along. I wanted a sheet I could print and practice from.</p></section>
 <section><h3>How it works</h3><p class="project-pipeline">YouTube link → frame extraction → crop → cleanup → stitch &amp; justify → PDF</p><p>I confirm the crop once per video. Vid2Tab handles page changes and scrolling tabs, cleans up overlays and backgrounds, and packs the music into full-width lines. It keeps the notation staff and chord diagrams when the source has them.</p></section>
 <section class="project-demo"><h3>Demo</h3><p>The recording above shows my local app: paste a link, confirm the music area, make a sheet, then play along with the video and the current measure highlighted.</p><figure><img src="assets/projects/vid2tab/before-after.png" width="3200" height="1800" loading="lazy" decoding="async" alt="Before: a YouTube guitar tutorial shows a few bars with a moving playhead and overlays. After: Vid2Tab arranges the notation and tablature into clean, full-width lines on a printable sheet."><figcaption>From a few bars on screen to one printable practice sheet.</figcaption></figure></section>
 <section><h3>Tech</h3><p>I built the processing pipeline in Python, with yt-dlp for downloads, ffmpeg for video processing, and image processing for cleanup and layout. I used Claude Code as an AI pair-programmer.</p></section>
-<section><h3>What’s next</h3><p>The web interface, on-screen sheet player, and video play-along work in the local app. Next, I want to offer hosted access: paste a link and get a PDF without running it locally.</p></section>
 </div></details>
 </article>
 
