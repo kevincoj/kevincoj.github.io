@@ -8,7 +8,7 @@ npm test
 npm run serve
 ```
 
-Open http://127.0.0.1:63219/ . The production puzzle catalog is intentionally empty until Kevin supplies puzzles. No live database has been connected: completion counts require the backend configuration in [Deployment](docs/deployment.md).
+Open http://127.0.0.1:63219/ . The production puzzle catalog is intentionally empty until Kevin supplies puzzles. The Supabase backend is deployed and connected to the local preview. Live API and transactional SQL checks passed; a full real-puzzle solve awaits the owner’s first puzzle. See [Supabase status](docs/supabase-status.md) and [Deployment](docs/deployment.md).
 
 - Website files: `outputs/portfolio-preview/` (this is the folder to publish).
 - Puzzle publishing: `puzzle-catalog.json`, bundled `puzzles/*.puz`, then `npm run validate:puzzles`.

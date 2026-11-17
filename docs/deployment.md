@@ -2,7 +2,7 @@
 
 ## What is ready and what needs access
 
-The static site, Supabase SQL schema, public Edge Function, tests, and setup files are local. No Supabase project or live tracking has been created or connected. To deploy, use a Supabase account/project you control and a static website host. Do not paste passwords, access tokens, service-role keys or token secrets into chat.
+The Supabase project and public completion function are now deployed and connected to the local preview; see [current setup status](supabase-status.md). The instructions below describe setup and future maintenance. The portfolio website still needs a public static host and owner-supplied puzzles. Do not paste passwords, access tokens, service-role keys or token secrets into chat.
 
 The website can use GitHub Pages; only publish `outputs/portfolio-preview/`, not the repository, tests or secret files. Add the final website origin to the function's allowlist. No visitor accounts or Supabase Auth sign-in are used.
 
