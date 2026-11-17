@@ -5,3 +5,5 @@ node_modules/
 supabase/.temp/
 supabase/.branches/
 work/browser-artifacts/
+
+work/dashboard-deploy/
