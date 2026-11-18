@@ -1,0 +1,3 @@
+# Approved pastel frames and controls
+User approved shared pastel media frames retaining NYT Games typography, black rules and white page. Periwinkle for Vid2Tab, yellow for TeachLA, sage crosswords. Colors may repeat for future projects. Preserve real recordings, factual copy and CMS updates.
+Use matching white outlined Play/Pause pills, bottom right with reserved space outside recording. Default paused. Captions below frame: App walkthrough / Illustrative preview. Visible focus. Project details + changes to Close details −; external links retain diagonal arrows. Move availability from technology list to project status. Keep no-JS access and media fallback. No publish requested in this turn.
