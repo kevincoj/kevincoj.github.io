@@ -10,7 +10,7 @@ test('the writeup is one readable story with the walkthrough beside its video',a
  for(const width of [1280,390]){
   await page.setViewportSize({width,height:844});expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
   const column=await story.boundingBox();const paragraphs=await story.locator('.story-section > p').evaluateAll(ps=>ps.map(p=>({x:p.getBoundingClientRect().x,width:p.getBoundingClientRect().width})));
-  expect(column.width).toBeLessThanOrEqual(780);for(const p of paragraphs){expect(Math.abs(p.x-column.x)).toBeLessThanOrEqual(1);expect(p.width).toBeLessThanOrEqual(column.width);}
+  expect(column.width).toBeLessThanOrEqual(920);if(width===1280){expect(column.width).toBeGreaterThanOrEqual(880);const projectBox=await project.boundingBox();expect(Math.abs(column.x-projectBox.x)).toBeLessThanOrEqual(1);}for(const p of paragraphs){expect(Math.abs(p.x-column.x)).toBeLessThanOrEqual(1);expect(p.width).toBeLessThanOrEqual(column.width);}
   await page.screenshot({path:`work/browser-artifacts/story-${width}.png`,fullPage:true});
  }
 });

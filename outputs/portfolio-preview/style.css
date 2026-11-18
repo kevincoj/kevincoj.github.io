@@ -173,8 +173,8 @@ html:not(.js) .project .explore[data-details]{display:none}
 @media(prefers-reduced-motion:reduce){.project-preview .project-media-toggle,.explore{transition:none}.explore:active,.project-media-toggle:active{transform:none}}
 
 /* The case study is a single editorial reading column, separate from the compact overview. */
-.project-story{max-width:74ch;margin:12px auto 8px;padding-top:28px;border-top:1px solid #d5d5cf;font-size:15px;line-height:1.75}
-.project-story>h3{font-family:Newsreader,Georgia,serif;font-size:36px;line-height:1.12;letter-spacing:-.6px;text-wrap:balance;margin:0 0 32px;max-width:28ch}
+.project-story{max-width:920px;margin:12px 0 8px;padding-top:28px;border-top:1px solid #d5d5cf;font-size:15px;line-height:1.75}
+.project-story>h3{font-family:Newsreader,Georgia,serif;font-size:36px;line-height:1.12;letter-spacing:-.6px;text-wrap:balance;margin:0 0 32px;}
 .project-story .story-section{margin:0 0 32px}
 .project-story h4{font-family:Newsreader,Georgia,serif;font-size:27px;line-height:1.2;letter-spacing:-.3px;margin:0 0 14px}
 .project-story p{font-size:15px;line-height:1.75;margin:0 0 14px;max-width:none}

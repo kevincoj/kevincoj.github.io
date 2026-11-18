@@ -1,0 +1,29 @@
+# Inline project details versus separate case studies
+
+Researched November 18, 2026. Scope: a personal CS portfolio with two projects; title, purpose, media, technology stack and source links already visible; roughly 400 words of additional writing behind each Project details disclosure.
+
+## Recommendation for this site
+
+Keep one inline disclosure per project for now. This is a contextual design judgment, **not a pattern empirically validated for software-engineering recruiting**. A reviewer can scan both projects first, then open the explanation that interests them without leaving the collection. Once expanded, present the writeup as a continuous, readable document with useful subheadings, rather than another set of nested disclosures.
+
+Keep each project's purpose, Kevin's specific contribution and a truthful result or current status visible before expansion. Stack and source links alone do not explain ownership or accomplishment. Avoid invented metrics. Use the disclosure for implementation choices, constraints, tradeoffs, challenges and fuller reflection. This application follows NN/g's advice to keep crucial content outside collapsed panels; the choice of which portfolio facts are crucial is our judgment. [NN/g: Accordions on Desktop](https://www.nngroup.com/articles/accordions-on-desktop/)
+
+A separate page becomes useful if a project needs an independent shareable URL, substantial diagrams and media, or a longer narrative that is cumbersome inside the project list. Those are practical reasons, not a demonstrated hiring advantage. Around 400 words is not, by itself, a reason to require another page; no source below establishes a word-count cutoff. Both formats normally require one initial action to open detail. Evaluate clarity, reading comfort, context, navigation and load time as well as action count.
+
+## Primary sources for the decision
+
+**Closest component match: [GOV.UK Design System, Details](https://design-system.service.gov.uk/components/details/), accessed November 18, 2026.** It recommends a details disclosure for one section of information needed by only some users, explicitly preferring details to tabs or an accordion for a single section. It cautions against hiding information most users need, and recommends short, descriptive link text. The page also links research reporting that some users mistake disclosure links for navigation. This supports a visibly clear expansion affordance; it does not establish hiring effectiveness or suitability of every 400-word narrative. Treat the current component as a single disclosure per project rather than a multi-section accordion.
+
+1. **[NN/g, Accordions on Desktop: When and How to Use](https://www.nngroup.com/articles/accordions-on-desktop/), Huei-Hsin Wang, July 30, 2023.** General usability guidance: disclosures support selective access to independent supplementary information, but reduce visibility and add interaction cost. Avoid hiding crucial information or forcing users to expand sections they need to read in full. Labels and expansion cues must be clear; permit multiple panels to remain open. Applied here: a single optional writeup per project is defensible; hiding all meaningful evidence is not. This is general UX guidance, not a developer hiring study.
+
+2. **[NN/g, The 3-Click Rule for Navigation Is False](https://www.nngroup.com/articles/3-click-rule/), Page Laubheimer, August 11, 2019.** Click count alone is an inadequate usability metric: instant expansion and slow page navigation have different costs, and comprehension and wayfinding also matter. Applied here: honor the preference for few clicks, but do not claim inline is automatically better solely because it avoids navigation. NN/g discusses other research; this article is its own guidance, not the underlying experiment, and it does not compare portfolio formats.
+
+3. **[GitHub Docs, Using your GitHub profile to enhance your resume](https://docs.github.com/en/account-and-profile/tutorials/using-your-github-profile-to-enhance-your-resume), accessed November 18, 2026.** Software-specific first-party platform advice: make selected projects easy to understand and explore, give a concise README overview, include key features, an example or demo, and setup and testing instructions. It supports clear summaries and accessible working evidence. It is editorial career advice, not controlled evidence that a website accordion or separate case-study page improves hiring outcomes. Do not turn its approximate reviewer-time advice into a universal measured attention span.
+
+## What design-portfolio evidence does and does not establish
+
+[NN/g, 5 Steps to Creating a UX-Design Portfolio](https://www.nngroup.com/articles/ux-design-portfolios/) reports a survey of 204 UX professionals responsible for hiring. It supports communicating the problem, individual role, process, constraints and impact through scannable case studies. Its audience is UX hiring, so transfer to a CS portfolio should be explicitly labeled an inference. A case study is a content format; this article does not demonstrate that it must have a dedicated URL or that inline presentation performs worse for SWE hiring.
+
+No located source directly compares inline 400-word project disclosures against separate case-study pages in software-engineering recruiting. A brief task-based review with intended readers would provide more site-specific evidence: can they identify what each project does, Kevin's contribution and the result without expansion, then find and understand an engineering decision when requested?
+
+Implementation scope: the requested change is reading width only if inline details remain. The recommendation about exposing personal contribution is a content caveat for future consideration, not authorization to change site copy in this pass.
