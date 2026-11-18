@@ -1,0 +1,18 @@
+{
+  "title": "Vid2Tab",
+  "status": "Featured project",
+  "description": "I built Vid2Tab to turn YouTube guitar tab videos into clean, printable sheet music PDFs.",
+  "tags": [
+    "Python",
+    "yt-dlp",
+    "ffmpeg",
+    "Image processing",
+    "Claude Code · AI coding agent"
+  ],
+  "problem": "I learn fingerstyle guitar from YouTube. Tutorials show a few bars at a time, so I kept pausing and scrubbing to play along. I wanted a sheet I could print and practice from.",
+  "pipeline": "YouTube link → frame extraction → crop → cleanup → stitch & justify → PDF",
+  "how_it_works": "I confirm the crop once per video. Vid2Tab handles page changes and scrolling tabs, cleans up overlays and backgrounds, and packs the music into full-width lines. It keeps the notation staff and chord diagrams when the source has them.",
+  "demo": "The recording above shows my local app: paste a link, confirm the music area, make a sheet, then play along with the video and the current measure highlighted.",
+  "caption": "From a few bars on screen to one printable practice sheet.",
+  "tech": "I built the processing pipeline in Python, with yt-dlp for downloads, ffmpeg for video processing, and image processing for cleanup and layout. I used Claude Code as an AI pair-programmer."
+}

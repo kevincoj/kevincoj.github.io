@@ -1,0 +1,118 @@
+# Edit wording at https://app.pagescms.org after connecting this repository.
+settings:
+  content:
+    merge: true
+content:
+  - name: site
+    label: "Homepage & crosswords"
+    type: file
+    path: content/site.json
+    format: json
+    fields:
+      - name: intro
+        label: "Homepage introduction"
+        type: text
+        required: true
+      - name: about_heading
+        label: "About heading"
+        type: string
+        required: true
+      - name: about
+        label: "About paragraph"
+        type: text
+        required: true
+      - name: footer
+        label: "Footer text"
+        type: text
+        required: true
+      - name: crosswords_heading
+        label: "Crossword banner heading"
+        type: string
+        required: true
+      - name: crosswords_summary
+        label: "Crossword banner description"
+        type: text
+        required: true
+      - name: crossword_empty_intro
+        label: "Crosswords: no puzzles introduction"
+        type: text
+        required: true
+      - name: crossword_published_intro
+        label: "Crosswords: introduction when puzzles are published"
+        type: text
+        required: true
+      - name: crossword_empty_status
+        label: "Crosswords: empty collection message"
+        type: text
+        required: true
+  - name: vid2tab
+    label: "Vid2Tab text"
+    type: file
+    path: content/vid2tab.json
+    format: json
+    fields:
+      - name: title
+        label: "Project name"
+        type: text
+        required: true
+        description: "A new line creates a line break. Project links stay the same."
+      - name: status
+        label: "Project status"
+        type: string
+        required: true
+      - name: description
+        label: "Short project description"
+        type: text
+        required: true
+      - name: tags
+        label: "Technology tags"
+        type: string
+        required: true
+        list: true
+      - name: problem
+        label: "Problem paragraph"
+        type: text
+        required: true
+      - name: pipeline
+        label: "How it works: pipeline"
+        type: text
+        required: true
+      - name: how_it_works
+        label: "How it works: explanation"
+        type: text
+        required: true
+      - name: demo
+        label: "Demo explanation"
+        type: text
+        required: true
+      - name: caption
+        label: "Before/after image caption"
+        type: text
+        required: true
+      - name: tech
+        label: "Technology & tools paragraph"
+        type: text
+        required: true
+  - name: teachla
+    label: "TeachLA text"
+    type: file
+    path: content/teachla.json
+    format: json
+    fields:
+      - name: title
+        label: "Project name"
+        type: text
+        required: true
+        description: "A new line creates a line break. Project links stay the same."
+      - name: status
+        label: "Project status"
+        type: string
+        required: true
+      - name: description
+        label: "Short project description"
+        type: text
+        required: true
+      - name: details
+        label: "Project details"
+        type: text
+        required: true

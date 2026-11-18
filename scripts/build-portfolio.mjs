@@ -1,8 +1,10 @@
+import {buildContent} from './render-content.mjs';
 import {cp,mkdir,rm,readFile} from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const source=path.join(root,'outputs/portfolio-preview');
+await buildContent(root);
 const destination=path.join(root,'dist');
 // Only the website runtime files are staged; repository docs, tests and secrets stay outside dist.
 await rm(destination,{recursive:true,force:true});

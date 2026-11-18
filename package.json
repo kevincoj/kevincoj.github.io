@@ -3,10 +3,12 @@
   "private": true,
   "scripts": {
     "test": "node --test work/crossword-qa/*.test.cjs",
-    "serve": "python3 -m http.server 63219 --bind 127.0.0.1 --directory outputs/portfolio-preview",
+    "serve": "node scripts/render-content.mjs && python3 -m http.server 63219 --bind 127.0.0.1 --directory outputs/portfolio-preview",
     "test:browser": "playwright test --reporter=line",
     "validate:puzzles": "node scripts/validate-puzzles.mjs",
-    "build": "node scripts/build-portfolio.mjs"
+    "build": "node scripts/build-portfolio.mjs",
+    "content": "node scripts/render-content.mjs",
+    "pretest:browser": "node scripts/render-content.mjs"
   },
   "devDependencies": {
     "@playwright/test": "^1.65.1"

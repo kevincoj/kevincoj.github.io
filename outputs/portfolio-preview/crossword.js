@@ -681,9 +681,10 @@ async function initializeCrosswords() {
     if(pageMode==='collection') {
       // Fetch only the puzzle a visitor opens; the catalog stays lightweight.
       const intro=document.querySelector('#crossword-intro');
-      if(intro) intro.textContent=entries.length?'Crosswords by Kevin Co. Pick a puzzle and make yourself at home.':'No crosswords yet. I’ll post my puzzles here when they’re ready.';
+      if(intro) intro.textContent=entries.length?intro.dataset.publishedIntro:intro.dataset.emptyIntro;
       showPuzzleLibrary();
-      document.querySelector('#puz-message').textContent=entries.length?'Pick a crossword to play.':'No crosswords published yet. Check back soon.';
+      const message=document.querySelector('#puz-message');
+      message.textContent=entries.length?'Pick a crossword to play.':message.dataset.emptyMessage;
     } else {
       const record=[...puzzleRecords.values()].find(r=>r.id===requestedId);
       if(record) {document.querySelector('#puz-message').textContent='';displayPuzzle(record.puzzle);}
