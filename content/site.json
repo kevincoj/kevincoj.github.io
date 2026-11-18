@@ -1,12 +1,12 @@
 {
   "intro": "Hi I'm Kevin Co I'm a CS student at UCLA and these are my personal projects",
-  "about_heading": "A little about me.",
-  "about": "I’m Kevin Co, a computer science student at UCLA. This is a home for my personal projects and crosswords.",
-  "footer": "Kevin Co · Projects & puzzles.\n",
-  "crosswords_heading": "A little wordplay.",
-  "crosswords_summary": "A home for my crosswords.",
+  "about_heading": "My name is Kevin Co.",
+  "about": "Current CS student at UCLA. This is a home for my personal projects and crosswords.",
+  "footer": "Kevin Co\n",
+  "crosswords_heading": "crosswords coming soon...",
+  "crosswords_summary": "A future home for my crosswords.",
   "crossword_empty_intro": "No crosswords yet. I’ll post my puzzles here when they’re ready.",
-  "crossword_published_intro": "Crosswords by Kevin Co. Pick a puzzle and make yourself at home.",
+  "crossword_published_intro": "Crosswords by Kevin Co.",
   "crossword_empty_status": "No crosswords published yet. Check back soon.",
   "crossword_collection_note": "New crosswords will appear here when Kevin publishes them."
 }
