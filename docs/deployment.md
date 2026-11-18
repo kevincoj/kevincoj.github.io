@@ -2,9 +2,9 @@
 
 ## What is ready and what needs access
 
-The Supabase project and public completion function are now deployed and connected to the local preview; see [current setup status](supabase-status.md). The instructions below describe setup and future maintenance. The portfolio website still needs a public static host and owner-supplied puzzles. Do not paste passwords, access tokens, service-role keys or token secrets into chat.
+The Supabase project and public completion function are now deployed and connected to the local preview; see [current setup status](supabase-status.md). The instructions below describe setup and future maintenance. The portfolio is configured for GitHub Pages at https://kevincoj.github.io/; owner-supplied puzzles are still needed. See [editing and publishing](editing.md). Do not paste passwords, access tokens, service-role keys or token secrets into chat.
 
-The website can use GitHub Pages; only publish `outputs/portfolio-preview/`, not the repository, tests or secret files. Add the final website origin to the function's allowlist. No visitor accounts or Supabase Auth sign-in are used.
+GitHub Actions renders the CMS content, builds, and publishes only `dist/`, not repository docs, tests, or secret files. Before publishing real puzzles, add `https://kevincoj.github.io` to the completion function's origin allowlist and run the live smoke test below. No visitor accounts or Supabase Auth sign-in are used.
 
 ## Backend setup
 

@@ -1,20 +1,36 @@
-# Kevin Co's portfolio
+# Kevin Co — portfolio
 
-A separate working copy of the original portfolio, extended with published crosswords and an account-free completion tracker. The portfolio remains static HTML/CSS/JavaScript. Supabase stores completion reports and optional public solver names.
+My personal projects and crosswords, built with HTML, CSS, and JavaScript.
+
+- **Portfolio:** https://kevincoj.github.io/
+- **Edit text:** https://app.pagescms.org/ — connect this repository once, then edit labeled fields and Save.
+- **Editing guide:** [docs/editing.md](docs/editing.md)
+
+The featured Vid2Tab project uses a real MP4 walkthrough, a still poster for reduced motion, a GIF fallback, and a before/after example. TeachLA Coding Race currently uses an illustrative animation. No crosswords are published yet.
+
+## How it works
+
+`content/*.json` stores editable text. `templates/*.html` preserves the page layout. `npm run build` escapes content into static HTML and copies only the website runtime into `dist`. Pages CMS writes content changes to GitHub; the Publish portfolio workflow runs checks and deploys `dist` to GitHub Pages.
+
+The crossword player is custom browser-side JavaScript. Supabase handles optional completion tracking separately; see [deployment notes](docs/deployment.md). The empty collection does not call the completions API.
+
+## Development
+
+Requires Node.js 22+, npm, and Python 3 for the local preview server.
 
 ```sh
 npm ci
-npm test
 npm run serve
 ```
 
-Open http://127.0.0.1:63219/ . The production puzzle catalog is intentionally empty until Kevin supplies puzzles. The Supabase backend is deployed and connected to the local preview. Live API and transactional SQL checks passed; a full real-puzzle solve awaits the owner’s first puzzle. See [Supabase status](docs/supabase-status.md) and [Deployment](docs/deployment.md).
+After editing a content file while the server is running, run `npm run content` and refresh. For checks:
 
-- Website files: `outputs/portfolio-preview/` (this is the folder to publish).
-- Puzzle publishing: `puzzle-catalog.json`, bundled `puzzles/*.puz`, then `npm run validate:puzzles`.
-- Development-only imports: `crosswords.html?dev=1`. Imports stay in the browser tab and do not submit completions.
-- Backend: `supabase/migrations/` and `supabase/functions/completions/`.
-- Node tests: `npm test`; browser tests: `npx playwright install chromium`, then `npm run test:browser`.
-- Original project: `/Users/kevin/Documents/Codex/2026-10-23/i-wan` was preserved.
+```sh
+npm test
+npm run validate:puzzles
+npx playwright install chromium
+npm run test:browser
+npm run build
+```
 
-Vid2Tab uses the supplied real MP4 walkthrough, a first-frame poster, GIF fallback and before/after comparison. TeachLA still uses a labeled illustrative animation; its recording and the résumé still need the owner’s content. The original solver supports basic rectangular .puz puzzles; rebus/circles and locked solutions are unsupported. Read [deployment and publishing instructions](docs/deployment.md) before making the site public.
+Website runtime: `outputs/portfolio-preview/`. Build output: `dist/`. Content/editor configuration: `content/` and `.pages.yml`. Do not edit generated `index.html` or `crosswords.html` directly; use their templates. Keep `.env*` files and backend credentials private.
