@@ -14,6 +14,7 @@ test('CMS-style text edits reach generated pages and survive crossword initializ
   site.intro='I build guitar tools & puzzles <script>throw Error("bad")</script>';
   site.crossword_empty_intro='My puzzles are still in the works.';
   site.crossword_empty_status='Nothing published here yet.';
+  site.crossword_collection_note='I’m making the first puzzle.';
   await writeFile(path.join(root,'content/site.json'),JSON.stringify(site));
   const project=JSON.parse(await readFile(path.join(root,'content/vid2tab.json'),'utf8'));
   project.title='My guitar project';project.tags=['Python','A&B'];
@@ -32,5 +33,6 @@ test('CMS-style text edits reach generated pages and survive crossword initializ
   await page.goto('/crosswords.html');
   await expect(page.locator('#puz-message')).toHaveText('Nothing published here yet.');
   await expect(page.locator('#crossword-intro')).toHaveText('My puzzles are still in the works.');
+  await expect(page.locator('#library-note')).toHaveText('I’m making the first puzzle.');
  }finally{await rm(root,{recursive:true,force:true});}
 });

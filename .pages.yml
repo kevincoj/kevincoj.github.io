@@ -45,6 +45,10 @@ content:
         label: "Crosswords: empty collection message"
         type: text
         required: true
+      - name: crossword_collection_note
+        label: "Crosswords: collection note"
+        type: text
+        required: true
   - name: vid2tab
     label: "Vid2Tab text"
     type: file

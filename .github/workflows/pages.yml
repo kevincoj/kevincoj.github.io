@@ -10,6 +10,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   checks:
+    if: github.ref == 'refs/heads/main'
     uses: ./.github/workflows/test.yml
     permissions:
       contents: read

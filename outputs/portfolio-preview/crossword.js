@@ -97,7 +97,7 @@ function renderPuzzleLibrary() {
     list.append(item);
   }
   document.querySelector('#library-note').textContent = puzzleRecords.size < 2
-    ? (developmentMode ? 'Development imports stay in this browser tab.' : 'New crosswords will appear here when Kevin publishes them.')
+    ? (developmentMode ? 'Development imports stay in this browser tab.' : document.querySelector('#library-note').dataset.collectionNote)
     : 'Choose a puzzle. Published puzzle progress is saved in this browser.';
 }
 function showPuzzleLibrary() {
