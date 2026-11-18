@@ -1,7 +1,7 @@
 {
   "title": "Vid2Tab",
-  "status": "Completed November 2026",
-  "description": "I built Vid2Tab to turn YouTube guitar tab videos into clean, printable sheet music PDFs.",
+  "status": "Completed November 2026 · Try it yourself!",
+  "description": "I built Vid2Tab to turn YouTube guitar tab videos into clean, printable sheet music PDFs. ",
   "tags": [
     "Python",
     "yt-dlp",
