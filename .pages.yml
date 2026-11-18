@@ -73,28 +73,61 @@ content:
         type: string
         required: true
         list: true
-      - name: problem
-        label: "Problem paragraph"
+      - name: story_title
+        label: "Writeup title"
         type: text
         required: true
-      - name: pipeline
-        label: "How it works: pipeline"
+      - name: walkthrough_caption
+        label: "Walkthrough description (beside video)"
         type: text
         required: true
-      - name: how_it_works
-        label: "How it works: explanation"
+      - name: why_heading
+        label: "Why I built it — heading"
+        type: string
+        required: true
+      - name: why_body
+        label: "Why I built it — paragraphs"
         type: text
         required: true
-      - name: demo
-        label: "Demo explanation"
+        description: "Separate paragraphs with a blank line. Plain text; no HTML needed."
+      - name: engineering_heading
+        label: "Turning the idea into a working product — heading"
+        type: string
+        required: true
+      - name: engineering_body
+        label: "Turning the idea into a working product — paragraphs"
         type: text
         required: true
+        description: "Separate paragraphs with a blank line. Plain text; no HTML needed."
+      - name: practice_heading
+        label: "Beyond PDF extraction — heading"
+        type: string
+        required: true
+      - name: practice_body
+        label: "Beyond PDF extraction — paragraphs"
+        type: text
+        required: true
+        description: "Separate paragraphs with a blank line. Plain text; no HTML needed."
+      - name: ai_heading
+        label: "Building with AI agents — heading"
+        type: string
+        required: true
+      - name: ai_body
+        label: "Building with AI agents — paragraphs"
+        type: text
+        required: true
+        description: "Separate paragraphs with a blank line. Plain text; no HTML needed."
+      - name: next_heading
+        label: "What's next — heading"
+        type: string
+        required: true
+      - name: next_body
+        label: "What's next — paragraphs"
+        type: text
+        required: true
+        description: "Separate paragraphs with a blank line. Plain text; no HTML needed."
       - name: caption
         label: "Before/after image caption"
-        type: text
-        required: true
-      - name: tech
-        label: "Technology & tools paragraph"
         type: text
         required: true
   - name: teachla

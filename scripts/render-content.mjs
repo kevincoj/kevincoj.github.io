@@ -17,6 +17,9 @@ export function renderTemplate(template,content) {
       return value.map(tag=>`<li>${text(tag,key)}</li>`).join('');
     }
     const escaped=text(value,key);
+    if(group==='vid2tab'&&['why_body','engineering_body','practice_body','ai_body','next_body'].includes(field)) {
+      return escaped.split(/\r?\n\s*\r?\n/).map(paragraph=>`<p>${paragraph}</p>`).join('');
+    }
     return field==='title'?escaped.replace(/\r?\n/g,'<br>'):escaped;
   });
 }

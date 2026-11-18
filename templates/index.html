@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kevin Co — projects & puzzles</title><link rel="stylesheet" href="style.css?v=refinement-1"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kevin Co — projects & puzzles</title><link rel="stylesheet" href="style.css?v=story-1"></head>
 <body>
 <a class="skip" href="#projects">Skip to projects</a>
 <div class="page">
@@ -14,17 +14,12 @@
 </div>
 <p class="media-status" role="status"></p>
 <noscript><a class="media-download" href="assets/projects/vid2tab/demo.mp4">Watch the Vid2Tab demo</a></noscript>
-</div><figcaption class="preview-footer"><span class="sample-label">Video to printable sheet</span><div class="media-controls"><button class="pause project-media-toggle" aria-label="Play Vid2Tab demo" hidden><span class="pause-icon" aria-hidden="true"></span><span class="media-toggle-text" aria-hidden="true">Play</span></button></div></figcaption></figure>
+</div><figcaption class="preview-footer"><span class="sample-label">Video to printable sheet</span><div class="media-controls"><button class="pause project-media-toggle" aria-label="Play Vid2Tab demo" hidden><span class="pause-icon" aria-hidden="true"></span><span class="media-toggle-text" aria-hidden="true">Play</span></button></div></figcaption><p class="walkthrough-caption">{{vid2tab.walkthrough_caption}}</p></figure>
 <div class="project-copy">
 <ul class="tech-tags" aria-label="Built with">{{vid2tab.tags}}</ul>
 <div class="actions"><button class="explore" data-details="vid2tab-details" aria-controls="vid2tab-details" aria-expanded="false">Project details <span aria-hidden="true">+</span></button><a class="explore project-link" href="https://github.com/kevincoj/Vid2Tab">Get it on GitHub <span aria-hidden="true">↗</span></a></div>
 </div>
-<details class="project-details" id="vid2tab-details"><summary>Vid2Tab project notes</summary><div class="project-detail-grid">
-<section><h3>Problem</h3><p>{{vid2tab.problem}}</p></section>
-<section><h3>How it works</h3><p class="project-pipeline">{{vid2tab.pipeline}}</p><p>{{vid2tab.how_it_works}}</p></section>
-<section class="project-demo"><h3>Demo</h3><p>{{vid2tab.demo}}</p><figure><img src="assets/projects/vid2tab/before-after.png" width="3200" height="1800" loading="lazy" decoding="async" alt="Before: a YouTube guitar tutorial shows a few bars with a moving playhead and overlays. After: Vid2Tab arranges the notation and tablature into clean, full-width lines on a printable sheet."><figcaption>{{vid2tab.caption}}</figcaption></figure></section>
-<section><h3>Tech</h3><p>{{vid2tab.tech}}</p></section>
-</div></details>
+<details class="project-details" id="vid2tab-details"><summary>Vid2Tab project notes</summary><div class="project-story"><h3>{{vid2tab.story_title}}</h3><section class="story-section"><h4>{{vid2tab.why_heading}}</h4>{{vid2tab.why_body}}</section><section class="story-section"><h4>{{vid2tab.engineering_heading}}</h4>{{vid2tab.engineering_body}}</section><figure class="story-result"><img src="assets/projects/vid2tab/before-after.png" width="3200" height="1800" loading="lazy" decoding="async" alt="A YouTube guitar tutorial beside the printable sheet created by Vid2Tab."><figcaption>{{vid2tab.caption}}</figcaption></figure><section class="story-section"><h4>{{vid2tab.practice_heading}}</h4>{{vid2tab.practice_body}}</section><section class="story-section"><h4>{{vid2tab.ai_heading}}</h4>{{vid2tab.ai_body}}</section><section class="story-section"><h4>{{vid2tab.next_heading}}</h4>{{vid2tab.next_body}}</section></div></details>
 </article>
 
 <article class="project" id="teachla">
@@ -38,4 +33,4 @@
 </main>
 <footer><span>{{site.footer}}</span><a href="mailto:kevinco@ucla.edu">kevinco@ucla.edu</a></footer>
 <details class="preview-tools"><summary>Try your own recordings</summary><p>Videos replace the sample animations inside the same panels. Files stay local and reset when you reload.</p><div class="upload-row"><label class="file-button">TeachLA recording<input type="file" accept="video/*" data-video="race"></label><button id="reset-media">Reset previews</button></div></details>
-</div><script src="portfolio.js?v=refinement-1"></script><script src="project-media.js?v=refinement-1"></script></body></html>
+</div><script src="portfolio.js?v=story-1"></script><script src="project-media.js?v=story-1"></script></body></html>

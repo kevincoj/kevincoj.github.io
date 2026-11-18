@@ -39,3 +39,8 @@ test('build renders every template before overwriting generated output',async()=
   assert.equal(await readFile(path.join(root,'outputs/portfolio-preview/index.html'),'utf8'),'Last good output');
  }finally{await rm(root,{recursive:true,force:true});}
 });
+test('story paragraphs preserve breaks and escape pasted markup',async()=>{
+ const {renderTemplate}=await renderer;
+ assert.equal(renderTemplate('{{vid2tab.why_body}}',{vid2tab:{why_body:'First & second.\n\n<script>bad()</script>\n\nLast.'}}),'<p>First &amp; second.</p><p>&lt;script&gt;bad()&lt;/script&gt;</p><p>Last.</p>');
+ assert.throws(()=>renderTemplate('{{vid2tab.why_body}}',{vid2tab:{why_body:'  '}}),/vid2tab.why_body/);
+});
