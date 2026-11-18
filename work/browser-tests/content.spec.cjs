@@ -26,7 +26,7 @@ test('CMS-style text edits reach generated pages and survive crossword initializ
   await page.goto('/');
   await expect(page.locator('.portfolio-intro>p')).toHaveText(site.intro);
   await expect(page.locator('.portfolio-intro script')).toHaveCount(0);
-  await expect(page.locator('#vid2tab h1')).toHaveText('My guitar project');
+  await expect(page.locator('#vid2tab').getByRole('heading',{level:2})).toHaveText('My guitar project');
   await expect(page.locator('#vid2tab .tech-tags li')).toHaveText(['Python','A&B']);
   await expect(page.locator('#vid2tab video')).toHaveAttribute('data-src','assets/projects/vid2tab/demo.mp4');
   await page.route('**/crosswords.html',route=>route.fulfill({body:crosswords,contentType:'text/html'}));

@@ -10,17 +10,18 @@
     const motion = matchMedia('(prefers-reduced-motion: reduce)');
     let desiredPlaying = false;
     let generation = 0;
+    let hasPlayed = false;
     let fallback = !video.canPlayType('video/mp4');
     video.muted = true;
     video.autoplay = false;
     button.hidden = false;
 
     function render(playing) {
-      button.setAttribute('aria-pressed', String(!playing));
+      button.dataset.paused = String(!playing);
       button.setAttribute('aria-label', `${playing ? 'Pause' : 'Play'} Vid2Tab demo`);
       label.textContent = playing ? 'Pause' : 'Play';
-      video.hidden = !playing || fallback;
-      poster.hidden = playing && !fallback;
+      video.hidden = fallback || !hasPlayed;
+      poster.hidden = !fallback && hasPlayed;
       const imagePath = playing && fallback ? video.dataset.fallbackSrc : posterPath;
       if (poster.getAttribute('src') !== imagePath) poster.src = imagePath;
     }
@@ -42,6 +43,7 @@
       try {
         await video.play();
         if (request !== generation) { if (!desiredPlaying) video.pause(); return; }
+        hasPlayed = true;
         render(true);
         status.textContent = '';
       } catch {

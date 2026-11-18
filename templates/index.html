@@ -1,22 +1,23 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kevin Co — projects & puzzles</title><link rel="stylesheet" href="style.css?v=pastel-1"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Kevin Co — projects & puzzles</title><link rel="stylesheet" href="style.css?v=refinement-1"></head>
 <body>
 <a class="skip" href="#projects">Skip to projects</a>
 <div class="page">
 <header><a class="wordmark" href="#projects">Kevin Co<span class="mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span></a><nav aria-label="Main navigation"><a class="active" href="#projects">Projects</a><a href="crosswords.html">Crosswords</a><a href="#about">About</a></nav></header>
-<main id="projects" aria-label="Selected projects">
+<main id="projects" aria-label="Selected projects"><h1 class="visually-hidden">Kevin Co’s projects</h1>
 <div class="portfolio-intro"><p>{{site.intro}}</p><div class="contact-links" aria-label="Find me online"><a href="https://github.com/kevincoj">GitHub</a><a href="https://www.linkedin.com/in/kevinco26">LinkedIn</a><a href="mailto:kevinco@ucla.edu">Email <span aria-hidden="true">↗</span></a></div></div>
 <article class="project project-featured" id="vid2tab">
-<figure class="project-preview"><div class="media blue vid2tab-media" id="vid2tab-demo" data-project-media>
-<div class="preview-stage"><img class="project-poster" src="assets/projects/vid2tab/poster.jpg" width="1600" height="1000" alt="Vid2Tab’s local app, with a YouTube link field and a library of printable guitar sheets." fetchpriority="high">
-<video muted loop playsinline preload="metadata" poster="assets/projects/vid2tab/poster.jpg" width="1600" height="1000" data-src="assets/projects/vid2tab/demo.mp4" data-fallback-src="assets/projects/vid2tab/demo.gif" aria-label="Vid2Tab demo: a YouTube guitar tutorial becomes a printable sheet, followed by play-along in the local app." hidden></video>
-</div><div class="media-controls"><button class="pause project-media-toggle" aria-label="Play Vid2Tab demo" aria-pressed="true" hidden><span class="pause-icon" aria-hidden="true"></span><span class="media-toggle-text" aria-hidden="true">Play</span></button></div>
-<p class="media-status visually-hidden" role="status"></p>
+<div class="project-heading"><div class="title-line"><h2>{{vid2tab.title}}</h2><span class="status">{{vid2tab.status}}</span></div><p>{{vid2tab.description}}</p></div>
+<figure class="project-preview" id="vid2tab-demo" data-project-media><div class="media paper vid2tab-media">
+<div class="preview-stage"><img class="project-poster" src="assets/projects/vid2tab/before-after.png" width="3200" height="1800" alt="A YouTube guitar tutorial becomes a clean, printable Vid2Tab sheet." fetchpriority="high">
+<video muted loop playsinline preload="metadata" poster="assets/projects/vid2tab/before-after.png" width="1600" height="1000" data-src="assets/projects/vid2tab/demo.mp4" data-fallback-src="assets/projects/vid2tab/demo.gif" aria-label="Vid2Tab demo: a YouTube guitar tutorial becomes a printable sheet, followed by play-along in the local app." hidden></video>
+</div>
+<p class="media-status" role="status"></p>
 <noscript><a class="media-download" href="assets/projects/vid2tab/demo.mp4">Watch the Vid2Tab demo</a></noscript>
-</div><figcaption class="sample-label">App walkthrough</figcaption></figure>
-<div class="project-copy"><div class="title-line"><h1>{{vid2tab.title}}</h1><span class="status">{{vid2tab.status}}</span></div><p>{{vid2tab.description}}</p>
+</div><figcaption class="preview-footer"><span class="sample-label">Video to printable sheet</span><div class="media-controls"><button class="pause project-media-toggle" aria-label="Play Vid2Tab demo" hidden><span class="pause-icon" aria-hidden="true"></span><span class="media-toggle-text" aria-hidden="true">Play</span></button></div></figcaption></figure>
+<div class="project-copy">
 <ul class="tech-tags" aria-label="Built with">{{vid2tab.tags}}</ul>
-<div class="actions"><button class="explore" data-details="vid2tab-details" aria-controls="vid2tab-details" aria-expanded="false">Project details <span aria-hidden="true">+</span></button><a class="explore project-link" href="https://github.com/kevincoj/Vid2Tab">GitHub <span aria-hidden="true">↗</span></a></div>
+<div class="actions"><button class="explore" data-details="vid2tab-details" aria-controls="vid2tab-details" aria-expanded="false">Project details <span aria-hidden="true">+</span></button><a class="explore project-link" href="https://github.com/kevincoj/Vid2Tab">Get it on GitHub <span aria-hidden="true">↗</span></a></div>
 </div>
 <details class="project-details" id="vid2tab-details"><summary>Vid2Tab project notes</summary><div class="project-detail-grid">
 <section><h3>Problem</h3><p>{{vid2tab.problem}}</p></section>
@@ -27,13 +28,14 @@
 </article>
 
 <article class="project" id="teachla">
-<figure class="project-preview"><div class="media yellow" data-demo="race"><div class="preview-stage"><canvas aria-label="Illustrative coding race animation"></canvas><video muted loop playsinline hidden aria-label="TeachLA project recording"></video></div><div class="media-controls"><button class="pause project-media-toggle" aria-label="Play TeachLA preview" aria-pressed="true" hidden><span class="pause-icon" aria-hidden="true"></span><span class="media-toggle-text" aria-hidden="true">Play</span></button></div></div><figcaption class="sample-label">Illustrative preview</figcaption></figure>
-<div class="project-copy"><div class="title-line"><h2>{{teachla.title}}</h2><span class="status">{{teachla.status}}</span></div><p>{{teachla.description}}</p><div class="actions"><button class="explore" data-details="teachla-details" aria-controls="teachla-details" aria-expanded="false">Project details <span aria-hidden="true">+</span></button></div><details class="project-details" id="teachla-details"><summary>Project notes</summary><p>{{teachla.details}}</p></details></div>
+<div class="project-heading"><div class="title-line"><h2>{{teachla.title}}</h2><span class="status">{{teachla.status}}</span></div><p>{{teachla.description}}</p></div>
+<figure class="project-preview" data-demo="race"><div class="media yellow"><div class="preview-stage"><canvas aria-label="Illustrative coding race animation"></canvas><video muted loop playsinline hidden aria-label="TeachLA project recording"></video></div></div><figcaption class="preview-footer"><span class="sample-label">Illustrative preview</span><div class="media-controls"><button class="pause project-media-toggle" aria-label="Play TeachLA preview" hidden><span class="pause-icon" aria-hidden="true"></span><span class="media-toggle-text" aria-hidden="true">Play</span></button></div></figcaption></figure>
+<div class="project-copy"><div class="actions"><button class="explore" data-details="teachla-details" aria-controls="teachla-details" aria-expanded="false">Project details <span aria-hidden="true">+</span></button></div></div><details class="project-details" id="teachla-details"><summary>Project notes</summary><p>{{teachla.details}}</p></details>
 </article>
 
-<section class="crosswords" id="crosswords"><div class="crossword-mark" aria-hidden="true"></div><div><h2>{{site.crosswords_heading}}</h2><p>{{site.crosswords_summary}}</p></div><a class="puzzle-open" href="crosswords.html">Browse puzzles <span aria-hidden="true">↗</span></a></section>
+<section class="crosswords" id="crosswords"><div class="crossword-mark" aria-hidden="true"></div><div><h2>{{site.crosswords_heading}}</h2><p>{{site.crosswords_summary}}</p></div><a class="puzzle-open" href="crosswords.html">View collection <span aria-hidden="true">↗</span></a></section>
 <section id="about" class="about" hidden><h2>{{site.about_heading}}</h2><p>{{site.about}}</p><div class="contact-links"><a href="https://github.com/kevincoj">GitHub</a><a href="https://www.linkedin.com/in/kevinco26">LinkedIn</a><a href="mailto:kevinco@ucla.edu">kevinco@ucla.edu</a></div></section>
 </main>
 <footer><span>{{site.footer}}</span><a href="mailto:kevinco@ucla.edu">kevinco@ucla.edu</a></footer>
 <details class="preview-tools"><summary>Try your own recordings</summary><p>Videos replace the sample animations inside the same panels. Files stay local and reset when you reload.</p><div class="upload-row"><label class="file-button">TeachLA recording<input type="file" accept="video/*" data-video="race"></label><button id="reset-media">Reset previews</button></div></details>
-</div><script src="portfolio.js?v=pastel-1"></script><script src="project-media.js?v=pastel-1"></script></body></html>
+</div><script src="portfolio.js?v=refinement-1"></script><script src="project-media.js?v=refinement-1"></script></body></html>
